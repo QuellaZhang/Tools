@@ -1,0 +1,1 @@
+# Replace TestAssets.xml file with the one you wanted, running UpdateCommit.py.
