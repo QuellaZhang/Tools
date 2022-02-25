@@ -18,7 +18,9 @@ def getLatestCommit(projectName, url):
         branch = "develop"
     elif projectName in ["Facebook_ZSTD", "LZ4"]:
         branch = "dev"
-    elif projectName in ["WebKit", "LLVM", "VCPKG_Tool", "CoreCLR", "Git", "Python3", "React_Native_Windows", "LibJPEG_Turbo", "Electron", "Google_RE2", "Terminal", "Netplus", "Libigl"]:
+    elif projectName in ["WebKit", "LLVM", "VCPKG_Tool", "CoreCLR", "Git", "Python3", "React_Native_Windows", "LibJPEG_Turbo", "Electron", "Google_RE2", 
+                        "Terminal", "Netplus", "Libigl", "RxCpp", "Azure_iot_sdk_c", "Google_Snappy", "Tesseract", "LevelDB", "Crunch", "ONNX","STL", 
+                        "Mixxx", "Cppcheck", "Box2d"]:
         branch = "main"
     elif projectName in ["CryEngine"]:
         branch = "release"
@@ -28,6 +30,8 @@ def getLatestCommit(projectName, url):
         branch = "8.0"
     elif projectName in ["QT5"]:
         branch = "5.15"
+    elif projectName in ["QT6"]:
+        branch = "6.3"
     elif projectName in ["LUA"]:
         branch = "lua-5.1"
     elif projectName in ["LUAJIT"]:
@@ -38,6 +42,10 @@ def getLatestCommit(projectName, url):
         branch = "vs2019"
     elif projectName in ["Capemon"]:
         branch = "capemon"
+    elif projectName in ["Catch2"]:
+        branch = "devel"
+    elif projectName in ["Renderdoc"]:
+        branch = "v1.x"
     else:
         branch = "master"
 
@@ -88,7 +96,7 @@ def updateSHA(filename):
 if __name__ == "__main__":
 
     manualCheckList  = []
-    fixedCommit = ["Chrome", "Cutlass", "Benchstone", "Geekbench4", "Storage-XEngSys", "Storage-XStore"]
+    fixedCommit = ["Chrome", "Cutlass", "Benchstone", "Geekbench4", "Storage-XEngSys", "Storage-XStore", "CoreMark"]
 
     updateSHA("TestAssets.xml")
 
