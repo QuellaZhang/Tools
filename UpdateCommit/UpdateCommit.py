@@ -14,42 +14,19 @@ class Projects:
         self.url = url
 
 def getLatestCommit(projectName, url):
-    if projectName in ["Outcome", "KTL", "SOL2"]:
-        branch = "develop"
-    elif projectName in ["Facebook_ZSTD", "LZ4"]:
-        branch = "dev"
-    elif projectName in ["WebKit", "LLVM", "VCPKG_Tool", "CoreCLR", "Git", "Python3", "React_Native_Windows", "LibJPEG_Turbo", "Electron", "Google_RE2", 
-                        "Terminal", "Netplus", "Libigl", "RxCpp", "Azure_iot_sdk_c", "Google_Snappy", "Tesseract", "LevelDB", "Crunch", "ONNX","STL", 
-                        "Mixxx", "Cppcheck", "Box2d"]:
-        branch = "main"
-    elif projectName in ["CryEngine"]:
-        branch = "release"
-    elif projectName in ["LAME"]:
-        branch = "origin"
-    elif projectName in ["MySQL"]:
-        branch = "8.0"
-    elif projectName in ["QT5"]:
+    if projectName in ["QT5"]:
         branch = "5.15"
     elif projectName in ["QT6"]:
         branch = "6.3"
-    elif projectName in ["LUA"]:
-        branch = "lua-5.1"
-    elif projectName in ["LUAJIT"]:
-        branch = "v2.1"
-    elif projectName in ["Cocos2dx"]:
-        branch = "v4"
-    elif projectName in ["CppCoro"]:
-        branch = "vs2019"
-    elif projectName in ["Capemon"]:
-        branch = "capemon"
-    elif projectName in ["Catch2"]:
-        branch = "devel"
-    elif projectName in ["Renderdoc"]:
-        branch = "v1.x"
-    else:
+    elif projectName in ["UnrealEngine"]:
         branch = "master"
-
-    os.system(r"getLatestCommit.cmd" + " " + url + " " + r"refs/heads/" + branch)
+    else:
+        branch = "default"
+    
+    if branch == "default":
+        os.system(r"getLatestCommit.cmd" + " " + url + " " + r"origin HEAD")
+    else:
+        os.system(r"getLatestCommit.cmd" + " " + url + " " + r"refs/heads/" + branch)
 
     with open(r'commit.txt', 'r') as file:
         line = file.readline()
@@ -104,5 +81,6 @@ if __name__ == "__main__":
     os.mkdir(str)
     shutil.move(r"TestAssets_new.xml", str)
 
-    print("Note: Failed to update %s commit, please manually check" % manualCheckList)
-    print("Note: The %s commit don't need to be updated" % fixedCommit)
+    print("Note: For QT5 nad QT6, please use the latest stable branch, such as 5.15/5.16, 6.2/6.3\n")
+    print("Note: Failed to update %s commit, please manually check\n" % manualCheckList)
+    print("Note: The %s commit don't need to be updated\n" % fixedCommit)
