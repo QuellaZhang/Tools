@@ -20,6 +20,8 @@ def getLatestCommit(projectName, url):
         branch = "6.3"
     elif projectName in ["UnrealEngine"]:
         branch = "master"
+    elif projectName in ["Sogou_Workflow"]:
+        branch = "windows"
     else:
         branch = "default"
     
