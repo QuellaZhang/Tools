@@ -17,7 +17,7 @@ def getLatestCommit(projectName, url):
     if projectName in ["QT5"]:
         branch = "5.15"
     elif projectName in ["QT6"]:
-        branch = "6.3"
+        branch = "6.10"
     elif projectName in ["UnrealEngine"]:
         branch = "master"
     elif projectName in ["Sogou_Workflow"]:
@@ -54,7 +54,10 @@ def updateSHA(filename):
                 project.name = str(Name[0])
                 # print(project.name)
 
-            if project.name not in manualCheckList and project.name not in fixedCommit:
+            manualCheckListLower = {x.lower() for x in manualCheckList}
+            fixedCommitLower = {x.lower() for x in fixedCommit}
+
+            if project.name.lower() not in manualCheckListLower and project.name.lower() not in fixedCommitLower:
                 if r"<url>" in line:
                     URL = (re.compile('>(.*)<')).findall(line) # match url
                     project.url = str(URL[0])
@@ -74,8 +77,8 @@ def updateSHA(filename):
 
 if __name__ == "__main__":
 
-    manualCheckList  = []
-    fixedCommit = ["Chrome", "Cutlass", "Benchstone", "Geekbench4", "Storage-XEngSys", "Storage-XStore", "CoreMark"]
+    manualCheckList  = ["CryEngine", "Ds_Sql", "KTL", "UnrealEngine"]
+    fixedCommit = ["Benchstone", "CoreMark", "Spec2017", "Storage-XEngSys", "Storage-XStore"]
 
     updateSHA("TestAssets.xml")
 
@@ -83,6 +86,7 @@ if __name__ == "__main__":
     os.mkdir(str)
     shutil.move(r"TestAssets_new.xml", str)
 
-    print("Note: For QT5 nad QT6, please use the latest stable branch, such as 5.15/5.16, 6.2/6.3\n")
-    print("Note: Failed to update %s commit, please manually check\n" % manualCheckList)
-    print("Note: The %s commit don't need to be updated\n" % fixedCommit)
+    print("\n")
+    print("\033[33mNote: For QT5 nad QT6, please use the latest stable branch, such as 5.15/5.16, 6.2/6.3\n\033[0m")
+    print("\033[31mNote: Failed to update %s commit, please manually check\n\033[0m" % manualCheckList)
+    print("\033[32mNote: The %s commit don't need to be updated\n\033[0m" % fixedCommit)
